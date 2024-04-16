@@ -1,0 +1,68 @@
+
+
+.form-container {
+    border-style: solid;
+    border-radius: 50px;
+    margin-left: 7rem;
+    margin-right: 3rem;
+    padding: 2rem;
+    height: 29rem;
+    width: 25rem;
+    background-color: #006B38FF;
+  }
+  
+  .form-group {
+    margin-bottom: 2rem;
+  }
+  
+  .form-group label {
+    color: white;
+    display: block;
+  }
+  
+  .form-group input[type="file"],
+  .form-group textarea {
+    color:white ;
+    background-color: #101820FF;
+    width: 100%;
+    padding: 10px;
+    margin-top: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize:none;
+  }
+
+  .form-group input[type="file"] {
+    width: 15rem;
+
+  }
+  
+  .form-group button {
+    
+    background-color:white;
+    color: #101820FF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .form-group button:hover {
+    background-color: #101820FF;
+    color: white;
+    font-weight: 600;
+  }
+  
+  .title{
+    color: #101820FF;
+    margin-left: 5rem;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+  }
+
+  .download-image{
+    margin-top: 0rem;
+    margin-bottom: 3rem;
+    height: 1rem;
+  }

@@ -7,7 +7,7 @@ const Form = () => {
     
     const fileInput = event.target.elements.fileUpload;
     const selectedFile = fileInput.files[0];
-    
+    const btnName = event.nativeEvent.submitter.name
     if (!selectedFile) {
       console.log("No file selected.");
       return;
@@ -29,13 +29,31 @@ const Form = () => {
       const filename = "encoded_image.png"
       // Convert response to blob
       const blob = await response.blob();
-      const blobUrl = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = blobUrl;
-      a.download = filename;
-      a.click();
-      // Clean up
-      URL.revokeObjectURL(blobUrl);
+      var data = new FormData();
+      const file = new File([blob], "save_it.png")
+      data.append("file", file);
+      if(btnName==="up"){
+        fetch("http://inventory-managment.ap-south-1.elasticbeanstalk.com/api/s3", {
+          method: "POST",
+          body: data
+        }).then(async function (res) {
+            const resp = await res.json();
+            console.log(resp);
+           const res_msg = "Image Link (copy and save it): "+ resp.url
+           alert(res_msg);
+        }).catch(function (error) {
+          alert("File is too large to save it in cloud. Download the file instead")
+          console.error("Fetch Error:", error);
+        });
+      }else{
+        const blobUrl = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = filename;
+        a.click();
+        // Clean up
+        URL.revokeObjectURL(blobUrl);
+      }
     }).catch(function (error) {
       console.error("Fetch Error:", error);
       alert("Oops! " + error.message);
@@ -43,7 +61,7 @@ const Form = () => {
   };
 
   const downloadRandomImage = () =>{
-    fetch("https://api.unsplash.com//photos/random?client_id=", {
+    fetch("https://api.unsplash.com//photos/random?client_id=SlqNcGhtw0VYyGIRmTG2XJhmOAKUp833TYW6Kx3l", {
       method: "GET"
     }).then(async function (response) {
       if (!response.ok) {
@@ -84,7 +102,8 @@ const Form = () => {
           <textarea id="textInput" name="textInput" rows="3" cols="50"></textarea>
         </div>
         <div className="form-group">
-          <button type="submit">Submit</button>
+          <button name="down" className="btn-down" type="submit">Encode and download</button>
+          <button name="up" className="btn-up" type="submit">Encode and save it to cloud</button>
         </div>
       </form>
     </div>

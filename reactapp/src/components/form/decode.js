@@ -4,7 +4,6 @@ import './form.css';
 const Form = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
-    
     const fileInput = event.target.elements.fileUpload;
     const selectedFile = fileInput.files[0];
     
@@ -42,7 +41,7 @@ const Form = () => {
           <input type="file" id="fileUpload" name="fileUpload" accept=".png" />
         </div>
         <div className="form-group">
-          <button type="submit">Submit</button>
+          <button type="submit">Decode the image</button>
         </div>
       </form>
     </div>
